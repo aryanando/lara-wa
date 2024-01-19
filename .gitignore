@@ -2,6 +2,7 @@
 /node_modules
 /waweb_server/node_modules
 /waweb_server/.wwebjs_cache
+/waweb_server/.wwebjs_auth
 /public/build
 /public/hot
 /public/storage

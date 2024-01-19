@@ -2,14 +2,11 @@ var express = require('express');
 var app = express();
 
 const cors = require("cors");
-const corsOptions = {
-    origin: '*',
-    credentials: true,            //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-}
 
-const { Client } = require('whatsapp-web.js');
-const client = new Client();
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const client = new Client({
+    authStrategy: new LocalAuth()
+});
 
 var qrcode = 'false';
 var login_status = false;
@@ -26,13 +23,28 @@ client.on('ready', () => {
 
 client.initialize();
 
+const corsOptions = {
+    origin: '*',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}
+
 app.use(cors(corsOptions));
 app.get('/', function (req, res) {
     if (login_status) {
         res.json({ 'login_status': login_status });
-    }else{
+    } else {
         res.json({ 'qr-token': qrcode, 'login_status': login_status });
     }
+});
+
+app.get('/send', function (req, res) {
+    client.isRegisteredUser("6289675171190@c.us").then(function (isRegistered) {
+        if (isRegistered) {
+            client.sendMessage("6289675171190@c.us", "hello");
+            res.json({ 'message': 'Message send !!!' });
+        }
+    });
 });
 
 app.listen(3000);
