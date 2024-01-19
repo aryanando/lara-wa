@@ -21,6 +21,10 @@ Route::get('/login-wa', function () {
     return view('whatsapp__qr') ;
 });
 
+Route::get('/whatsapp-dashboard', function () {
+    return view('whatsapp__dashboard') ;
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
