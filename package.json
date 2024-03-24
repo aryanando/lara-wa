@@ -2,14 +2,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "pm2 start vite",
         "build": "vite build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.0",
         "autoprefixer": "^10.4.7",
-        "axios": "^1.6.4",
+        "axios": "^1.6.5",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.14",
         "tailwindcss": "^3.1.0",

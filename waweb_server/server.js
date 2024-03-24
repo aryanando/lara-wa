@@ -1,7 +1,11 @@
+var { CronJob } = require('cron');
+
 var express = require('express');
 var app = express();
 
 const cors = require("cors");
+
+// ------------- This For Whatsapp Web Worker
 
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const client = new Client({
@@ -22,6 +26,8 @@ client.on('ready', () => {
 });
 
 client.initialize();
+
+// ------------  This for API Worker
 
 const corsOptions = {
     origin: '*',
@@ -48,3 +54,16 @@ app.get('/send', function (req, res) {
 });
 
 app.listen(3000);
+
+// ------------- This for Sceduler
+
+const job = CronJob.from({
+	cronTime: '* * * * * *',
+	onTick: function () {
+		console.log('you will see this at 01/20/2024 14:30:00');
+	},
+	start: true,
+	timeZone: 'Asia/Jakarta'
+});
+
+job.start;

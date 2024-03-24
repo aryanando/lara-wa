@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "laravel-app",
+            "script": "artisan",
+            "args": [
+                "serve"
+            ],
+            "interpreter": "php"
+        }
+    ]
+}
